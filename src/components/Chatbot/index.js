@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import safeEval from 'safe-eval';
 import { addSentMessage, addReceivedMessage } from './actions';
 import Message from './Message';
 import MessageInput from './MessageInput';
@@ -16,23 +17,23 @@ class ChatbotWrapper extends Component {
   }
 
   fetchFuncFromString(codeStr, input) {
-    eval(`var fn = ${codeStr}`);
-    fn(input)
-    console.log('sdhsjdhsdjsd', fn(input));
+    const evaluated = safeEval(codeStr);
+    return evaluated(input);
   }
 
   fetchOutput(input) {
     const { tabIds, tabsHash, activeTab } = this.props.tabsPayload;
-    tabIds.map((tab, i) => {
+    let output;
+    tabIds.forEach((tab, i) => {
       if (tabsHash[tab].label === activeTab) {
-        this.fetchFuncFromString(tabsHash[tab].content, input);
+        output = this.fetchFuncFromString(tabsHash[tab].content, input);
       }
     });
+    return output;
   }
 
   handleAddMessage(input) {
-    // const output = this.fetchOutput(input);
-    const output = respond(input);
+    const output = this.fetchOutput(input);
     this.props.handleAddSentMessage(input);
     this.props.handleAddReceivedMessage(output);
   }

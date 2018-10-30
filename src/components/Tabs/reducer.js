@@ -5,13 +5,21 @@ import {
 } from './constants';
 import respond from '../util';
 
+const code = `
+/**
+* Enter your every-time code here.
+* This function will run every time when user performs some action.
+*/
+
+${respond.toString()}`;
+
 const initialState = {
   tabIds: ['1'],
   tabsHash: {
     '1': {
       id: '1',
       label: 'index.js',
-      content: respond.toString()
+      content: code
     },
   },
   activeTab: 'index.js',
@@ -36,10 +44,9 @@ export function tabsReducer(state = initialState, action) {
       }
     case SAVE_CODE:
       state.tabsHash[action.id] = {
-        ...state[action.id],
+        id: action.id,
         ...action.payload
       }
-      console.log('dhhsdksdksd', {...state});
       return {
         ...state
       }

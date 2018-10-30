@@ -30,6 +30,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.2",
+    "safe-eval": "^0.4.1",
     "styled-components": "^2.4.1"
   },
   "devDependencies": {

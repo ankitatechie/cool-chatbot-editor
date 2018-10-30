@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import MonacoEditor from 'react-monaco-editor';
 import PropTypes from 'prop-types';
 import ApplyChange from '../Tabs/ApplyChange';
-import { saveEditorChanges } from '../Tabs/actions';
 import './style.scss';
 
-class EditorLayout extends Component {
+class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +32,7 @@ class EditorLayout extends Component {
   }
 
   handleApplyChange() {
+    console.log('inside editor', this.props);
     const data = {
       id: this.props.tab.id,
       label: this.props.activeTab,
@@ -69,22 +68,5 @@ class EditorLayout extends Component {
     );
   }
 }
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    tabsPayload: state.tabs
-  }
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  handleApplyChange: (data) => {
-    dispatch(saveEditorChanges(data));
-  }
-});
-
-const Editor = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditorLayout);
 
 export default Editor;
