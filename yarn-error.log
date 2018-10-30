@@ -1,0 +1,74 @@
+Arguments: 
+  /usr/local/Cellar/node/10.9.0/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /Users/ankitaagarwal/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  10.9.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/lodash: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/lib/node_modules/yarn/lib/cli.js:120826:19)
+      at ontimeout (timers.js:424:11)
+      at tryOnTimeout (timers.js:288:5)
+      at listOnTimeout (timers.js:251:5)
+      at Timer.processTimers (timers.js:211:10)
+
+npm manifest: 
+  {
+    "name": "chatbox-app",
+    "version": "1.0.0",
+    "description": "Start building complex react-redux apps today, with this minimalist easy to understand starter kit (boilerplate)",
+    "keywords": [
+      "react",
+      "redux"
+    ],
+    "main": "index.js",
+    "scripts": {
+      "build": "webpack",
+      "start": "webpack-dev-server  --open",
+      "build-dev": "webpack --env=dev --progress --profile --colors",
+      "build-prod": "webpack -p --config webpack.prod.config.js",
+      "build:dist": "webpack --env=prod --progress --profile --colors"
+    },
+    "author": "Ankita Agarwal",
+    "license": "",
+    "dependencies": {
+      "lodash": "^4.17.4",
+      "react": "^15.6.1",
+      "react-dom": "^15.6.1",
+      "react-flexbox-grid": "^1.1.3",
+      "react-hot-loader": "^3.0.0-beta.7",
+      "react-redux": "^5.0.5",
+      "react-router": "^4.1.2",
+      "react-router-dom": "^4.1.2",
+      "redux": "^3.7.2",
+      "styled-components": "^2.1.1"
+    },
+    "devDependencies": {
+      "babel-core": "^6.25.0",
+      "babel-loader": "^7.1.1",
+      "babel-preset-env": "^1.6.0",
+      "babel-preset-es2015": "^6.24.1",
+      "babel-preset-react": "^6.24.1",
+      "css-loader": "^0.28.4",
+      "file-loader": "^0.11.2",
+      "html-webpack-plugin": "^2.30.1",
+      "style-loader": "^0.18.2",
+      "webpack": "^3.4.1",
+      "webpack-dev-server": "^2.6.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

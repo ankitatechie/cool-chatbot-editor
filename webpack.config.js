@@ -1,49 +1,70 @@
-// http://webpack.github.io/docs/configuration.html
-// http://webpack.github.io/docs/webpack-dev-server.html
-var app_root = 'src_users'; // the app root folder: src, src_users, etc
 var path = require('path');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const publicPath = '/dist/build/';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
-  app_root: app_root, // the app root folder, needed by the other webpack configs
-  entry: [
-    // http://gaearon.github.io/react-hot-loader/getstarted/
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
-    'babel-polyfill',
-    __dirname + '/' + app_root + '/index.js',
+  //Content 
+  entry: './src/index.js',
+  // A SourceMap without column-mappings ignoring loaded Source Maps. 
+  devtool: 'cheap-module-source-map',
+  plugins: [
+    //simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader.
+    new HtmlWebpackPlugin({
+      title: 'Hot Module Replacement'
+    }),
+    //Auto replacement of page when i save some file, even css
+    new webpack.HotModuleReplacementPlugin(),
+    new MonacoWebpackPlugin()
   ],
+
   output: {
-    path: __dirname + '/public/js',
-    publicPath: 'js/',
-    filename: 'bundle.js',
+    path: path.join(__dirname, publicPath),
+    filename: '[name].bundle.js',
+    publicPath: publicPath,
+    sourceMapFilename: '[name].map',
+  },
+
+  devServer: {
+    port: 3000,
+    host: 'localhost',
+    //Be possible go back pressing the "back" button at chrome
+    historyApiFallback: true,
+    noInfo: false,
+    stats: 'minimal',
+    publicPath: publicPath,
+    contentBase: path.join(__dirname, publicPath),
+    //hotmodulereplacementeplugin
+    hot: true
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        loaders: ['react-hot', 'babel'],
-        exclude: /node_modules/,
+        test: /\.(scss|css)$/,
+        use: [
+          {
+            loader: "style-loader" // creates style nodes from JS strings
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS
+          },
+          {
+            loader: "sass-loader" // compiles Sass to CSS
+          }
+        ]
       },
       {
-        // https://github.com/jtangelder/sass-loader
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       },
       {
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-      }
-    ],
+        test: /\.js|.jsx?$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader",
+          options: { presets: ["es2015"] }
+        }
+      }]
   },
-  devServer: {
-    contentBase: __dirname + '/public',
-  },
-  plugins: [
-    new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
-      root: __dirname + '/public',
-      verbose: true,
-      dry: false, // true for simulation
-    }),
-  ],
-};
+}

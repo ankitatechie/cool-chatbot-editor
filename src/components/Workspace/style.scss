@@ -1,0 +1,18 @@
+.editor-wrapper {
+  position: relative;
+  border-right: 2px solid #525252;
+  height: calc(100vh - 50px);
+}
+
+.editor-layout {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+}
+
+.editor--active {
+  visibility: visible;
+}
