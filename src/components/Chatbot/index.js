@@ -18,19 +18,12 @@ class ChatbotWrapper extends Component {
   }
 
   async fetchFuncFromString(codeStr, input) {
-    const evaluated = safeEval(codeStr);
-    // const evaluated = async (codeStr) => {
-    //   const output = await AwesomeApis.loadMovieInfo(input);
-    //   return output;
-    // }
-    return await evaluated(input);
+    const code = `(${codeStr})('${input}')`;
+    const context = {
+      AwesomeApis: AwesomeApis
+    }
+    return await safeEval(code, context);
   }
-
-  // async fetchFuncFromString(codeStr, input) {
-  //   const maker = (code) => safeEval(`(function la(){ return ${code} })()`);
-  //   const evaluated = maker(codeStr);
-  //   return evaluated(input);
-  // }
 
   async fetchOutput(input) {
     const { tabIds, tabsHash, activeTab } = this.props.tabsPayload;
