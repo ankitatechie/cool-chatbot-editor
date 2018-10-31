@@ -17,6 +17,7 @@
   "author": "Ankita Agarwal",
   "license": "",
   "dependencies": {
+    "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "monaco-editor-webpack-plugin": "^1.5.4",
     "react": "^15.6.2",
@@ -29,7 +30,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.2",
+    "redux-thunk": "^2.3.0",
     "safe-eval": "^0.4.1",
     "styled-components": "^2.4.1"
   },

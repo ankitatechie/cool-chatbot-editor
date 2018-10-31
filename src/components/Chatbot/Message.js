@@ -16,7 +16,7 @@ class Message extends Component {
   getReceivedMessage(text) {
     return (
       <div className="message-received">
-        <div className="inline-message sender-icon"></div>
+        <div className="inline-message sender-icon">(-_-)</div>
         <div className="inline-message message-text">{text}</div>
       </div>
     )

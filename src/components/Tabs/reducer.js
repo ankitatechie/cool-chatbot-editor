@@ -3,7 +3,7 @@ import {
   SELECT_TAB,
   SAVE_CODE,
 } from './constants';
-import respond from '../util';
+import respond from '../Helpers/util';
 
 const code = `
 /**
