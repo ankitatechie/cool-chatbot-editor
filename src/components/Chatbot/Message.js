@@ -17,7 +17,9 @@ class Message extends Component {
     return (
       <div className="message-received">
         <div className="inline-message sender-icon">(-_-)</div>
-        <div className="inline-message message-text">{text}</div>
+        <div className="inline-message message-text">
+          {text}
+        </div>
       </div>
     )
   }

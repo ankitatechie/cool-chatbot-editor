@@ -76,3 +76,12 @@
   height: 0;
   visibility: hidden;
 }
+
+.loader {
+  height: 30px;
+  display: none;
+}
+
+.loader--active {
+  display: block;
+}
